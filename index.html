@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valuador Inmobiliario</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PWA estilo app en iPhone -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Valuador" />
+
+  <!-- Color de tema / barra -->
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Icono de la app (pon tu PNG 512x512 con este nombre) -->
+  <link rel="apple-touch-icon" href="icono-inmueble-512.png">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>Valuador Inmobiliario</h1>
+      <p class="subtitle">Estimación express a partir de comparables</p>
+      <p id="save-status" class="small-text"></p>
+    </header>
+
+    <main class="app-main">
+      <!-- Datos básicos -->
+      <section class="card">
+        <h2>Datos de la propiedad</h2>
+
+        <label class="field">
+          <span>Nombre o zona</span>
+          <input type="text" id="prop-name" placeholder="Ej. Depto Roma Norte 2R" />
+        </label>
+
+        <label class="field">
+          <span>Metros cuadrados construidos</span>
+          <input type="number" id="prop-m2" min="1" step="1" placeholder="Ej. 80" />
+        </label>
+
+        <div class="field-group">
+          <label class="field">
+            <span>Tipo de inmueble</span>
+            <select id="prop-type">
+              <option value="departamento">Departamento</option>
+              <option value="casa">Casa</option>
+              <option value="terreno">Terreno</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Estado</span>
+            <select id="prop-state">
+              <option value="bajo">Necesita reforma</option>
+              <option value="medio" selected>Normal</option>
+              <option value="alto">Excelente</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <!-- Comparables -->
+      <section class="card">
+        <h2>Comparables</h2>
+        <p class="help-text">
+          Introduce precios de 2 o 3 propiedades similares (mismas zona y características).
+        </p>
+
+        <div class="field-group">
+          <label class="field">
+            <span>Comparable 1 (precio total)</span>
+            <input type="number" id="comp1" min="0" step="1000" placeholder="Ej. 2,500,000" />
+          </label>
+
+          <label class="field">
+            <span>Comparable 2 (precio total)</span>
+            <input type="number" id="comp2" min="0" step="1000" placeholder="Ej. 2,800,000" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Comparable 3 (opcional)</span>
+          <input type="number" id="comp3" min="0" step="1000" placeholder="Ej. 2,600,000" />
+        </label>
+      </section>
+
+      <!-- Acciones -->
+      <section class="card actions-card">
+        <button id="calc-btn" class="primary-btn">Calcular valuación</button>
+        <button id="clear-btn" class="secondary-btn">Limpiar todo</button>
+      </section>
+
+      <!-- Resultados -->
+      <section id="results" class="card results hidden">
+        <h2>Resultado estimado</h2>
+        <p id="summary" class="summary"></p>
+
+        <div class="results-grid">
+          <div class="result-box">
+            <span class="label">Promedio comparables</span>
+            <span id="avg-comps" class="value"></span>
+          </div>
+          <div class="result-box">
+            <span class="label">Precio sugerido</span>
+            <span id="suggested" class="value"></span>
+          </div>
+          <div class="result-box">
+            <span class="label">Rango bajo</span>
+            <span id="range-low" class="value small"></span>
+          </div>
+          <div class="result-box">
+            <span class="label">Rango alto</span>
+            <span id="range-high" class="value small"></span>
+          </div>
+        </div>
+
+        <p id="advice" class="advice"></p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
